@@ -1,0 +1,74 @@
+{% extends 'check_base.html' %}
+{%  block css_head %}
+    {{ super() }}
+    <style type="text/css">
+        .imgdup {
+		  width: 400px;
+		  height: auto;
+          display: flex;
+        }
+        .contdup{
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .flex-vert {
+          display: flex;
+          flex-direction: column;
+		  margin: 10px;
+		  padding: 10px;
+        }
+		.ruta {
+			background-color: #a1a1a1;
+		}
+    </style>
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    {% if lista_dups %}
+    <h1>Lista de duplicados</h1>
+        {% for k, v in lista_dups.items() %}
+            <div>
+                <div>Duplicado CRC = {{k}}</div>
+                <div class='flex-container'>
+                {% for img in v %}
+                    <div class='contdup'>
+                        <div class='flex-vert'>
+                            <div class='ruta'>{{img}}</div>
+                            <div><img class='imgdup' src={{ http_server }}{{ img }}></div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+        {% block formulario_borrado %}
+        <form method=post enctype=multipart/form-data>
+        <div>
+            <input type=submit value={{ lista_dups }} href="/borrar">
+        </div>
+
+
+      </form>
+    {% endblock %}
+    {% endif %}
+
+
+
+    {% block errores %}
+    {% if error_msg %}
+        <div class="error">
+            <h1>¡Error!</h1>
+            <p>{{ error_msg|safe }}</p></div>
+    {% endif %}
+    {% endblock %}
+
+{% endblock %}

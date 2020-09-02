@@ -1,0 +1,32 @@
+{%  block css_head %}
+    <style type="text/css">
+    </style>
+{% endblock %}
+
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Buscador de duplicados{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% block formulario %}
+        <form method=post enctype=multipart/form-data>
+        <h1>Buscador de imágenes duplicadas</h1>
+        <div>
+            <label for="ruta">Ruta de búsqueda</label>
+{#            <input type="file" name="ruta" id="ruta" required webkitdirectory directory/>#}
+            <input name="ruta" id="ruta" required>
+        </div>
+        <div>
+            <label for="recursivo">Recursivo</label>
+            <input type="checkbox" name="recursivo" id="recursivo" checked>
+        </div>
+        <div>
+            <input type=submit value="Buscar">
+        </div>
+
+
+      </form>
+    {% endblock %}
+{% endblock %}
